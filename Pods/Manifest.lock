@@ -1,0 +1,20 @@
+PODS:
+  - Cosmos (23.0.0)
+  - SnapKit (5.6.0)
+
+DEPENDENCIES:
+  - Cosmos
+  - SnapKit
+
+SPEC REPOS:
+  trunk:
+    - Cosmos
+    - SnapKit
+
+SPEC CHECKSUMS:
+  Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+
+PODFILE CHECKSUM: 60314315f31053b1ea9acb7967ddc94303380d2f
+
+COCOAPODS: 1.11.3
