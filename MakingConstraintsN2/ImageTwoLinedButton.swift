@@ -55,7 +55,7 @@ class ImageTwoLinedButton: UIButton {
         
         
         clipsToBounds = true
-        layer.cornerRadius = 33
+        layer.cornerRadius = 25
         layer.borderWidth = 1
         backgroundColor = .systemGray
     }
@@ -108,7 +108,7 @@ class ImageTwoLinedButton: UIButton {
         }
         primaryLabel.snp.makeConstraints { make in
             make.trailing.equalTo(circleImage.snp.leading)
-            make.top.equalToSuperview().inset(5)
+            make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(20)
             make.height.equalTo(30)
         }
@@ -116,7 +116,7 @@ class ImageTwoLinedButton: UIButton {
             make.trailing.equalTo(circleImage.snp.leading)
             make.top.equalTo(primaryLabel.snp.bottom)
             make.leading.equalToSuperview().inset(20)
-            make.height.equalTo(30)
+            make.height.equalTo(20)
         }
     }
 }

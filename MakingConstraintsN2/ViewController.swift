@@ -10,12 +10,22 @@ import SnapKit
 
 class ViewController: UIViewController {
     
+    let backgroundScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .clear
+        return scrollView
+    }()
+    
     let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "dark-road") ?? UIImage()
-        imageView.backgroundColor = .brown
-        imageView.contentMode = .scaleAspectFill
         return imageView
+    }()
+    
+    let viewForScrollView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
     }()
     
     let restoreButton: UIButton = {
@@ -129,6 +139,9 @@ class ViewController: UIViewController {
         accessButtons = [lifetimePlanButton, threeMonthPlanButton, oneMonthtimePlanButton]
         
         setupTermsLabel()
+        
+        
+        backgroundScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 926)
     }
     
     @objc func restoreButtonPressed() {
@@ -228,32 +241,47 @@ private extension ViewController {
     
     func addSubviews() {
         view.addSubview(backgroundImageView)
-        view.addSubview(restoreButton)
-        view.addSubview(unlimitedAccessLabel)
-        view.addSubview(buttonsStackView)
+        view.addSubview(backgroundScrollView)
+        
+        backgroundScrollView.addSubview(viewForScrollView)
+        
+        viewForScrollView.addSubview(restoreButton)
+        viewForScrollView.addSubview(unlimitedAccessLabel)
+        viewForScrollView.addSubview(buttonsStackView)
         
         buttonsStackView.addArrangedSubview(lifetimePlanButton)
         buttonsStackView.addArrangedSubview(threeMonthPlanButton)
         buttonsStackView.addArrangedSubview(oneMonthtimePlanButton)
         
-        view.addSubview(reviewsCollectionView)
-        view.addSubview(continueButton)
-        view.addSubview(textOrLabel)
-        view.addSubview(continueLimitedEditionButton)
-        view.addSubview(termsTextView)
+        viewForScrollView.addSubview(reviewsCollectionView)
+        viewForScrollView.addSubview(continueButton)
+        viewForScrollView.addSubview(textOrLabel)
+        viewForScrollView.addSubview(continueLimitedEditionButton)
+        viewForScrollView.addSubview(termsTextView)
     }
     
     func makeConstraints() {
         
-        backgroundImageView.snp.makeConstraints { make in
+        backgroundScrollView.snp.makeConstraints { make in
             make.leading.top.trailing.bottom.equalToSuperview()
         }
         
+        backgroundImageView.snp.makeConstraints { make in
+            make.top.equalTo(view.snp.top)
+            make.width.equalTo(UIScreen.main.bounds.width)
+            make.height.equalTo(926)
+        }
+        
+        viewForScrollView.snp.makeConstraints { make in
+            make.width.equalTo(UIScreen.main.bounds.width)
+            make.height.equalTo(926)
+        }
+        
         restoreButton.snp.makeConstraints { make in
-            make.leading.equalTo(self.view.safeAreaLayoutGuide.snp.leading).inset(20)
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(20)
+            make.leading.equalToSuperview().inset(20)
+            make.top.equalToSuperview().inset(40)
             make.width.equalTo(150)
-            make.height.equalTo(20)
+            make.height.equalTo(10)
         }
         
         unlimitedAccessLabel.snp.makeConstraints { make in
@@ -262,7 +290,7 @@ private extension ViewController {
         }
         
         buttonsStackView.snp.makeConstraints { make in
-            make.height.equalTo(240)
+            make.height.equalTo(200)
             make.top.equalTo(unlimitedAccessLabel.snp.bottom).inset(-25)
             make.leading.trailing.equalToSuperview().inset(40)
         }
@@ -274,18 +302,18 @@ private extension ViewController {
         }
         
         continueButton.snp.makeConstraints { make in
-            make.top.equalTo(reviewsCollectionView.snp.bottom).inset(-30)
+            make.bottom.equalTo(textOrLabel.snp.top).inset(-30)
             make.trailing.leading.equalToSuperview().inset(40)
             make.height.equalTo(70)
         }
         
         textOrLabel.snp.makeConstraints { make in
-            make.top.equalTo(continueButton.snp.bottom).inset(-10)
+            make.bottom.equalTo(continueLimitedEditionButton.snp.top).inset(-10)
             make.leading.trailing.equalToSuperview()
         }
         
         continueLimitedEditionButton.snp.makeConstraints { make in
-            make.top.equalTo(textOrLabel.snp.bottom).inset(-10)
+            make.bottom.equalTo(termsTextView.snp.top).inset(-10)
             make.leading.trailing.equalToSuperview()
         }
         
